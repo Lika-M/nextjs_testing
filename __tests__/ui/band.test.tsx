@@ -49,3 +49,14 @@ describe("Band component displays correctly band information", () => {
     expect(image).toHaveAttribute("src", "/band-images/band15.jpg");
   });
 });
+
+describe("Band component displays correctly error information", () => {
+  test("Display error", () => {
+    render(<BandComponent band={null} error="An error has occurred." />);
+    const error = screen.getByRole("heading", {
+      name: /an error has occurred/i,
+    });
+
+    expect(error).toBeInTheDocument();
+  });
+});
