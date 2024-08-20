@@ -14,6 +14,8 @@ const customJestConfig = {
   moduleNameMapper: {
     // Handle module aliases (this will be automatically configured for you soon)
     "^@/(.*)$": "<rootDir>/$1",
+    // Mock the next/image module
+    "^next/image$": "<rootDir>/__tests__/__mocks__/next/image.tsx",
   },
   testEnvironment: "jest-environment-jsdom",
 };
