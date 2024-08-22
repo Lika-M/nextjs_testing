@@ -9,4 +9,11 @@ describe("Reservation component displays correctly information", () => {
     const seatCountText = await screen.findByText(/10 seats left/i);
     expect(seatCountText).toBeInTheDocument();
   });
+
+  test("no available seats", async () => {
+    render(<Reservation showId={1} submitPurchase={jest.fn()}/>);
+
+    const seatCountText = await screen.findByText("Show is sold out!");
+    expect(seatCountText).toBeInTheDocument();
+  });
 });
