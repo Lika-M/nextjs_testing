@@ -1,10 +1,13 @@
 {
   "private": true,
   "scripts": {
+    "db:reset": "node scripts/reset-db.js",
     "dev": "next dev",
     "lint": "next lint",
     "build": "next build",
+    "build:test": "npm run db:reset && dotenv -c test next build",
     "start": "next start",
+    "start:test": "dotenv -c test next start",
     "test": "jest --watch",
     "test:ci": "jest --ci"
   },
@@ -50,6 +53,8 @@
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
     "babel-jest": "27.4.5",
+    "cypress": "^9.7.0",
+    "dotenv-cli": "^7.4.2",
     "eslint": "8.5.0",
     "eslint-config-next": "^12.1.0",
     "eslint-plugin-testing-library": "^5.0.1",
