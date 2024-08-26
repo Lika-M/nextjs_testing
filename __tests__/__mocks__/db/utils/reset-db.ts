@@ -3,10 +3,10 @@ import { filenames, writeJSONToFile } from "@/lib/db/db-utils";
 
 export async function resetDB() {
   //failsafe against production db!
-  const isSafeToReset = process.env.NODE_ENV === "test";
+  const isSafeToReset = process.env.NODE_ENV === "test" || process.env.CYPRESS;
 
   if (!isSafeToReset) {
-    console.log("WARNING: Database rest is unavailable outside test environment!");
+    console.log("WARNING: Database reset is unavailable outside test environment!");
     return;
   }
 
