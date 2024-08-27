@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
 import { Reservation } from "@/components/reservations/Reservation";
-import { sendRenderResult } from "next/dist/server/send-payload";
 
 describe("Reservation component displays correctly information", () => {
   test("number of available seats", async () => {
