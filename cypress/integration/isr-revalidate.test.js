@@ -20,5 +20,8 @@ describe("Test revalidation pages after updating.", () => {
     // reload the page; new band should appear
     cy.reload();
     cy.findByRole("heading", { name: /Avalanche of Cheese/i }).should("exist");
+
+    // reset ISR cache to the initial db condition
+    cy.resetDBAndIsrCache()
   });
 });
