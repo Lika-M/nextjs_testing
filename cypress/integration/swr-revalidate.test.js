@@ -3,6 +3,7 @@ import { generateRandomId } from "../../lib/features/reservations/utils";
 
 const ONE_SECOND = 1000;
 const THIRTY_SECONDS = 30 * ONE_SECOND;
+const FIFTEEN_SECONDS = 15 * ONE_SECOND;
 
 describe("Test revalidation on interval", () => {
   it("should refresh shows page after 30 seconds", () => {
@@ -30,5 +31,27 @@ describe("Test revalidation on interval", () => {
     //should have 2 sold out shows
     cy.tick(THIRTY_SECONDS);
     cy.findAllByText(/sold out/i).should("have.length", 2);
+  });
+
+  it.only("should refresh reservations page after tickets purchase and 15 sec interval", () => {
+    cy.clock();
+    cy.task("db:reset").visit("/reservations/0");
+
+    cy.findByRole("main").within(() => {
+      cy.findByRole("button", {name: /sign in/i}).click();
+    });
+
+    const reservation = generateNewReservation({
+      reservationId: generateRandomId(),
+      showId: 0,
+      seatCount: 2
+    });
+    cy.task("addNewReservation", reservation);
+
+    cy.tick(ONE_SECOND);
+    cy.findByText(/10 seats left/i).should("exist");
+
+    cy.tick(FIFTEEN_SECONDS);
+    cy.findByText(/8 seats left/i).should("exist");
   });
 });
