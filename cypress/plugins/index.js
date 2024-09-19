@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 const { resetDB } = require("../../__tests__/__mocks__/db/utils/reset-db");
 const { addBand } = require("../../lib/features/bands/queries");
+const {addReservation} = require("../../lib/features/reservations/queries")
 /**
  * @type {Cypress.PluginConfig}
  */
@@ -12,7 +13,8 @@ module.exports = (on, config) => {
   on("task", {
     // reset db before test
     "db:reset": () => resetDB().then(() => null),
-    "addNewBand": (newBand) => addBand(newBand).then(() => null)
+    "addNewBand": (newBand) => addBand(newBand).then(() => null),
+    "addNewReservation": (newReservation) => addReservation(newReservation).then(() => null)
   });
 
   // `on` is used to hook into various events Cypress emits
