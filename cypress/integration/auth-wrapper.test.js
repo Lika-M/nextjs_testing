@@ -88,3 +88,19 @@ describe("Parametrized tests with Fixures", () => {
   });
 
 });
+
+describe("Test Authenticating programmatically", () => {
+  it("does not show sign-in page when already signed in.", () => {
+    cy.task("db:reset");
+    cy.signIn(email, password);
+
+    //access reservations page for the first show
+    cy.visit("/reservations/0");
+    //make sure there is no sign-in page
+    cy.findByRole("heading", { name: /sign in to your account/i }).should("not.exist");
+    // and ticket purchase button is shown
+    cy.findByRole("main").within(() => {
+      cy.findByRole("button", { name: /purchase/i }).should("exist");
+    })
+  });
+});

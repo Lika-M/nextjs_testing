@@ -30,3 +30,24 @@ Cypress.Commands.add("resetDBAndIsrCache", () => {
   const secret = Cypress.env("REVALIDATION_SECRET");
   cy.request("GET", `/api/revalidate?secret=${secret}`)
 });
+
+// Note: for many auth systems,this would POST request to an API
+// rather than sign-in flow
+Cypress.Commands.add("signIn", (email, pass) => {
+  cy.visit("/auth/signin");
+
+  cy.findByLabelText(/email address/i)
+    .clear()
+    .type(email);
+
+  cy.findByLabelText(/password/i)
+    .clear()
+    .type(pass);
+
+  cy.findByRole("main").within(() => {
+    cy.findByRole("button", { name: /sign in/i })
+      .click();
+  });
+
+  cy.findByRole("heading", { name: /welcome/i }).should("exist");
+});
