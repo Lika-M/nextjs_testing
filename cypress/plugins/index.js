@@ -1,7 +1,9 @@
 /// <reference types="cypress" />
 const { resetDB } = require("../../__tests__/__mocks__/db/utils/reset-db");
 const { addBand } = require("../../lib/features/bands/queries");
-const {addReservation} = require("../../lib/features/reservations/queries")
+const {addReservation} = require("../../lib/features/reservations/queries");
+const dotenv = require('dotenv');
+dotenv.config({ path: '.env.test.local' });
 /**
  * @type {Cypress.PluginConfig}
  */
@@ -16,6 +18,9 @@ module.exports = (on, config) => {
     "addNewBand": (newBand) => addBand(newBand).then(() => null),
     "addNewReservation": (newReservation) => addReservation(newReservation).then(() => null)
   });
+
+  config.env.TEST_USER_EMAIL = process.env.TEST_USER_EMAIL;
+  config.env.TEST_PASSWORD = process.env.TEST_PASSWORD;
 
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
