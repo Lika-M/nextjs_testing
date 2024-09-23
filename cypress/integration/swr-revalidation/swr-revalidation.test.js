@@ -1,5 +1,5 @@
-import { generateNewReservation } from "../../__tests__/__mocks__/fakeData/newReservation.ts";
-import { generateRandomId } from "../../lib/features/reservations/utils";
+import { generateNewReservation } from "../../../__tests__/__mocks__/fakeData/newReservation.ts";
+import { generateRandomId } from "../../../lib/features/reservations/utils.ts";
 
 const ONE_SECOND = 1000;
 const THIRTY_SECONDS = 30 * ONE_SECOND;

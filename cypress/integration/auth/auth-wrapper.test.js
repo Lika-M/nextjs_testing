@@ -1,5 +1,6 @@
 const email = Cypress.env("TEST_USER_EMAIL");
 const password = Cypress.env("TEST_PASSWORD");
+console.log
 
 describe("Test auth wrapper", () => {
   it("runs auth flow for successful login to protected 'reservations' page", () => {

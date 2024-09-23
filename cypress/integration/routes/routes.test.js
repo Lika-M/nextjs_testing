@@ -1,5 +1,5 @@
-import { generateNewBand } from "../../__tests__/__mocks__/fakeData/newBand";
-import { generateRandomId } from "../../lib/features/reservations/utils";
+import { generateNewBand } from "../../../__tests__/__mocks__/fakeData/newBand";
+import { generateRandomId } from "../../../lib/features/reservations/utils";
 
 // test static routes
 describe("Static routes", () => {

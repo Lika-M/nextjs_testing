@@ -1,6 +1,6 @@
-import { generateNewBand } from "../../__tests__/__mocks__/fakeData/newBand";
-import { generateRandomId } from "../../lib/features/reservations/utils";
-import { generateNewShow } from "../../__tests__/__mocks__/fakeData/newShow";
+import { generateNewBand } from "../../../__tests__/__mocks__/fakeData/newBand";
+import { generateRandomId } from "../../../lib/features/reservations/utils";
+import { generateNewShow } from "../../../__tests__/__mocks__/fakeData/newShow";
 
 describe("Test revalidation pages after updating on-demand.", () => {
   it("should load refreshed bands page from cache after new band is added", () => {
