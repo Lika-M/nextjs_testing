@@ -19,6 +19,7 @@ const customJestConfig = {
     "^next/image$": "<rootDir>/__tests__/__mocks__/next/image.tsx",
   },
   testEnvironment: "jest-environment-jsdom",
+  watchPathIgnorePatterns: ["<rootDir>/__tests__/__mocks__/db/.*\\.json"]
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js
