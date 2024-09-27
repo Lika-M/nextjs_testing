@@ -3,6 +3,8 @@ import { testApiHandler } from "next-test-api-route-handler";
 import showsHandler from "@/pages/api/shows/index";
 import { readFakeData } from "@/__tests__/__mocks__/fakeData";
 
+import showIdHandler from "@/pages/api/shows/[showId]";
+
 it("GET request to api/shows returns shows from database", async () => {
   await testApiHandler({
     handler: showsHandler,
@@ -18,8 +20,24 @@ it("GET request to api/shows returns shows from database", async () => {
 
       const fakeData = await readFakeData();
       const { fakeShows } = fakeData;
-      console.log('json: ', json);
       expect(json).toEqual({ shows: fakeShows });
+    }
+  });
+});
+
+it("GET api/shows/[showId] returns data for the correct show ID", async () => {
+  await testApiHandler({
+    handler: showIdHandler,
+    // dynamic show id
+    paramsPatcher: (params) => { params["showId"] = 0 },
+    test: async ({ fetch }) => {
+      const res = await fetch({ method: "GET" });
+      expect(res.status).toBe(200);
+
+      const json = await res.json();
+      console.log(json)
+      const { fakeShows } = await readFakeData();
+      expect(json).toEqual({show: fakeShows[0]});
     }
   });
 });
