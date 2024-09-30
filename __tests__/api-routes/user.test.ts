@@ -39,8 +39,22 @@ it("GET api/users/[userId]/reservations returns correct number of reservations",
       expect(res.status).toBe(200);
 
       const json = await res.json();
-      console.log(json);
+      console.log(json); 
       expect(json.userReservations).toHaveLength(2);
+    }
+  });
+});
+
+it("GET api/users/[userId]/reservations returns empty array for user without reservations", async () => {
+  await testApiHandler({
+    handler: userReservationsHandler,
+    paramsPatcher: (params) => { params["userId"] = 12345 },
+    test: async ({ fetch }) => {
+      const res = await fetch({ method: "GET" });
+      expect(res.status).toBe(200);
+
+      const json = await res.json();
+      expect(json.userReservations).toHaveLength(0);
     }
   });
 });
