@@ -37,7 +37,21 @@ it("GET api/shows/[showId] returns data for the correct show ID", async () => {
       const json = await res.json();
       console.log(json)
       const { fakeShows } = await readFakeData();
-      expect(json).toEqual({show: fakeShows[0]});
+      expect(json).toEqual({ show: fakeShows[0] });
+    }
+  });
+});
+
+it("POST api/shows returns 401 unauthorize for incorrect revalidation secret", async () => {
+  await testApiHandler({
+    handler: showsHandler,
+    paramsPatcher: (params) => {
+      // query string param
+      params.queryStringUrlParams = "WRONG_REVALIDATION_SECRET";
+    },
+    test: async ({ fetch }) => {
+      const res = await fetch({ method: "POST" })
+      expect(res.status).toBe(401);
     }
   });
 });
